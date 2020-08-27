@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LayerObject} from 'projects/image-merge-frontend/src/lib/models/LayerObject.model';
+import {LayerObject} from 'projects/image-merge-frontend/src/lib/models/LayerObject.interface';
 
 @Component({
     selector: 'app-root',
@@ -9,6 +9,7 @@ import {LayerObject} from 'projects/image-merge-frontend/src/lib/models/LayerObj
 export class AppComponent {
     title = 'demo';
 
+    fullWidth = false;
     public activeLayer = 1;
     public activeImage = 0;
     public layerObjects: LayerObject[] =
@@ -18,32 +19,32 @@ export class AppComponent {
                     {
                         url: '/assets/body.png',
                         size: {
-                            x: '128px',
-                            y: '128px'
+                            x: 256,
+                            y: 256
                         },
                         offset: {
-                            x: '0px',
-                            y: '0px'
+                            x: 0,
+                            y: 0
                         },
                         actualSize: {
-                            x: '128px',
-                            y: '128px'
+                            x: 256,
+                            y: 256
                         },
                         active: false
                     },
                     {
                         url: '/assets/eyes.png',
                         size: {
-                            x: '128px',
-                            y: '128px'
+                            x: 256,
+                            y: 256
                         },
                         offset: {
-                            x: '0px',
-                            y: '0px'
+                            x: 0,
+                            y: 0
                         },
                         actualSize: {
-                            x: '128px',
-                            y: '128px'
+                            x: 256,
+                            y: 256
                         },
                         active: false
                     }
@@ -54,16 +55,16 @@ export class AppComponent {
                     {
                         url: '/assets/mouth.png',
                         size: {
-                            x: '128px',
-                            y: '128px'
+                            x: 256,
+                            y: 256
                         },
                         offset: {
-                            x: '0px',
-                            y: '0px'
+                            x: 0,
+                            y: 0
                         },
                         actualSize: {
-                            x: '128px',
-                            y: '128px'
+                            x: 256,
+                            y: 256
                         },
                         active: true
                     }
@@ -90,24 +91,28 @@ export class AppComponent {
     }
 
     public randomizeSize(): void {
-        const number5 = Math.random() * 30;
-        const number4 = Math.random() * 30;
-        const number3 = Math.random() * 30;
-        const number2 = Math.random() * 30;
-        const number1 = Math.random() * 30;
-        const number0 = Math.random() * 30;
-        this.layerObjects[0].images[0].size.x = (128 - number5) + 'px';
-        this.layerObjects[0].images[0].size.y = (128 - number4) + 'px';
-        this.layerObjects[0].images[1].size.x = (128 - number3) + 'px';
-        this.layerObjects[0].images[1].size.y = (128 - number2) + 'px';
-        this.layerObjects[1].images[0].size.x = (128 - number1) + 'px';
-        this.layerObjects[1].images[0].size.y = (128 - number0) + 'px';
+        const number5 = Math.random() * 50;
+        const number4 = Math.random() * 50;
+        const number3 = Math.random() * 50;
+        const number2 = Math.random() * 50;
+        const number1 = Math.random() * 50;
+        const number0 = Math.random() * 50;
+        this.layerObjects[0].images[0].size.x = (256 - number5);
+        this.layerObjects[0].images[0].size.y = (256 - number4);
+        this.layerObjects[0].images[1].size.x = (256 - number3);
+        this.layerObjects[0].images[1].size.y = (256 - number2);
+        this.layerObjects[1].images[0].size.x = (256 - number1);
+        this.layerObjects[1].images[0].size.y = (256 - number0);
 
-        this.layerObjects[0].images[0].offset.x = (Math.random() * number5) + 'px';
-        this.layerObjects[0].images[0].offset.y = (Math.random() * number4) + 'px';
-        this.layerObjects[0].images[1].offset.x = (Math.random() * number3) + 'px';
-        this.layerObjects[0].images[1].offset.y = (Math.random() * number2) + 'px';
-        this.layerObjects[1].images[0].offset.x = (Math.random() * number1) + 'px';
-        this.layerObjects[1].images[0].offset.y = (Math.random() * number0) + 'px';
+        this.layerObjects[0].images[0].offset.x = (Math.random() * number5);
+        this.layerObjects[0].images[0].offset.y = (Math.random() * number4);
+        this.layerObjects[0].images[1].offset.x = (Math.random() * number3);
+        this.layerObjects[0].images[1].offset.y = (Math.random() * number2);
+        this.layerObjects[1].images[0].offset.x = (Math.random() * number1);
+        this.layerObjects[1].images[0].offset.y = (Math.random() * number0);
+    }
+
+    public triggerResize(): void {
+        this.fullWidth = !this.fullWidth;
     }
 }

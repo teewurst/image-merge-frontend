@@ -1,4 +1,4 @@
-import {Coordinates} from './Coordinates.model';
+import {Coordinates} from 'projects/image-merge-frontend/src/lib/models/Coordinates.interface';
 
 export interface Image {
     url: string;

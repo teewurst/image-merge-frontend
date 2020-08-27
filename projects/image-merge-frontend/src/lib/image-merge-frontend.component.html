@@ -1,9 +1,15 @@
-<div class="image-merge-frontend">
+<div class="image-merge-frontend" #imageMergeFrontend>
     <div class="image-merge-frontend--layer-object" *ngFor="let layerObject of layerObjects">
         <img class="image-merge-frontend--image"
              *ngFor="let image of layerObject.images"
              [src]="image.url"
-             [ngStyle]="{position: 'absolute', top: image.offset.y, left: image.offset.x, height: image.size.y, width: image.size.x}"
+             [ngStyle]="{
+                position: 'absolute',
+                top: image.offset.y * ratio + 'px',
+                left: image.offset.x * ratio + 'px',
+                height: image.size.y * ratio + 'px',
+                width: image.size.x * ratio + 'px'
+              }"
              [ngClass]="{active: image.active}"
         />
     </div>
