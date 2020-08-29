@@ -1,5 +1,16 @@
-import {Image} from 'projects/image-merge-frontend/src/lib/models/Image.interface';
-
 export interface LayerObject {
   images: Image[];
+}
+
+export interface Image {
+  url: string;
+  size: Coordinates;
+  offset: Coordinates;
+  actualSize: Coordinates;
+  active: boolean;
+}
+
+export interface Coordinates {
+  x: number;
+  y: number;
 }
