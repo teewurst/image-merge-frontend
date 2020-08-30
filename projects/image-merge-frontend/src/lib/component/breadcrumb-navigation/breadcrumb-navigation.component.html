@@ -1,0 +1,5 @@
+<div class="breadcrumbs">
+    <ng-container *ngFor="let layerImage of layerImages">
+        <span class="breadcrumbs__breadcrumb" (click)="handleBreadcrumbIconClick(layerImage)">{{layerImage.name}}</span>
+    </ng-container>
+</div>

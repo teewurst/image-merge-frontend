@@ -1,0 +1,25 @@
+@import './../../../mixins';
+
+.breadcrumbs {
+  #mixin.icon();
+  display: inline-block;
+  margin:  4px 0 0 4px;
+
+  &__breadcrumb {
+    cursor: pointer;
+
+    &:after {
+      content: '|';
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+
+    &:last-child {
+      &:after {
+        content: '';
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}

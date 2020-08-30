@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LayerObject} from 'projects/image-merge-frontend/src/lib/models/LayerObject.interface';
+import {LayerImage} from 'projects/image-merge-frontend/src/lib/models/layer-object.interface';
 
 @Component({
     selector: 'app-root',
@@ -10,106 +10,123 @@ export class AppComponent {
     title = 'demo';
 
     fullWidth = false;
-    public activeLayer = 1;
-    public activeImage = 0;
-    public layerObjects: LayerObject[] =
-        [
+    public layerImage: LayerImage = {
+        id: 0,
+        name: 'Scene Face',
+        active: true,
+        images: [
             {
+                id: 1,
+                name: 'Body Background',
+                url: '/assets/body.png',
+                size: {
+                    x: 500,
+                    y: 500
+                },
+                offset: {
+                    x: 50,
+                    y: 150
+                },
+                actualSize: {
+                    x: 256,
+                    y: 256
+                },
+                icon: {
+                    offset: {
+                        x: 150,
+                        y: 200
+                    },
+                    display: 'Body',
+                },
+                active: false,
+            },
+            {
+                id: 2,
+                name: 'Face',
+                active: false,
+                icon: {
+                    offset: {
+                        x: 430,
+                        y: 530
+                    },
+                    display: 'Face',
+                },
                 images: [
                     {
-                        url: '/assets/body.png',
+                        url: '/assets/mouth.png',
+                        id: 0,
+                        name: 'Mouth',
                         size: {
-                            x: 256,
-                            y: 256
+                            x: 500,
+                            y: 500
                         },
                         offset: {
-                            x: 0,
-                            y: 0
+                            x: 50,
+                            y: 150
                         },
                         actualSize: {
                             x: 256,
                             y: 256
+                        },
+                        icon: {
+                            offset: {
+                                x: 400,
+                                y: 500
+                            },
+                            display: 'Mouth',
                         },
                         active: false
                     },
                     {
                         url: '/assets/eyes.png',
+                        id: 1,
+                        name: 'eyes',
                         size: {
-                            x: 256,
-                            y: 256
+                            x: 500,
+                            y: 500
                         },
                         offset: {
-                            x: 0,
-                            y: 0
+                            x: 50,
+                            y: 150
                         },
                         actualSize: {
                             x: 256,
                             y: 256
+                        },
+                        icon: {
+                            offset: {
+                                x: 125,
+                                y: 300
+                            },
+                            display: 'Eyes',
                         },
                         active: false
                     }
                 ]
             },
-            {
-                images: [
-                    {
-                        url: '/assets/mouth.png',
-                        size: {
-                            x: 256,
-                            y: 256
-                        },
-                        offset: {
-                            x: 0,
-                            y: 0
-                        },
-                        actualSize: {
-                            x: 256,
-                            y: 256
-                        },
-                        active: true
-                    }
-                ]
-            },
-        ];
-
-    public switchActive(): void {
-        this.layerObjects[this.activeLayer].images[this.activeImage].active = false;
-
-        if (++this.activeImage < this.layerObjects[this.activeLayer].images.length) {
-            this.layerObjects[this.activeLayer].images[this.activeImage].active = true;
-            return;
-        }
-        this.activeImage = 0;
-
-        if (++this.activeLayer < this.layerObjects.length) {
-            this.layerObjects[this.activeLayer].images[this.activeImage].active = true;
-            return;
-        }
-
-        this.activeLayer = 0;
-        this.layerObjects[this.activeLayer].images[this.activeImage].active = true;
-    }
+        ]
+    };
 
     public randomizeSize(): void {
         const number5 = Math.random() * 50;
-        const number4 = Math.random() * 50;
+        const number4 = Math.random() * 150;
         const number3 = Math.random() * 50;
-        const number2 = Math.random() * 50;
+        const number2 = Math.random() * 150;
         const number1 = Math.random() * 50;
-        const number0 = Math.random() * 50;
-        this.layerObjects[0].images[0].size.x = (256 - number5);
-        this.layerObjects[0].images[0].size.y = (256 - number4);
-        this.layerObjects[0].images[1].size.x = (256 - number3);
-        this.layerObjects[0].images[1].size.y = (256 - number2);
-        this.layerObjects[1].images[0].size.x = (256 - number1);
-        this.layerObjects[1].images[0].size.y = (256 - number0);
+        const number0 = Math.random() * 150;
+        this.layerImage.images[0].size.x = (500 - number5);
+        this.layerImage.images[0].size.y = (500 - number4);
+        this.layerImage.images[1].images[1].size.x = (500 - number3);
+        this.layerImage.images[1].images[1].size.y = (500 - number2);
+        this.layerImage.images[1].images[0].size.x = (500 - number1);
+        this.layerImage.images[1].images[0].size.y = (500 - number0);
 
-        this.layerObjects[0].images[0].offset.x = (Math.random() * number5);
-        this.layerObjects[0].images[0].offset.y = (Math.random() * number4);
-        this.layerObjects[0].images[1].offset.x = (Math.random() * number3);
-        this.layerObjects[0].images[1].offset.y = (Math.random() * number2);
-        this.layerObjects[1].images[0].offset.x = (Math.random() * number1);
-        this.layerObjects[1].images[0].offset.y = (Math.random() * number0);
+        this.layerImage.images[0].offset.x = (Math.random() * number5 + 50);
+        this.layerImage.images[0].offset.y = (Math.random() * number4 + 150);
+        this.layerImage.images[1].images[1].offset.x = (Math.random() * number3 + 50);
+        this.layerImage.images[1].images[1].offset.y = (Math.random() * number2 + 150);
+        this.layerImage.images[1].images[0].offset.x = (Math.random() * number1 + 50);
+        this.layerImage.images[1].images[0].offset.y = (Math.random() * number0 + 150);
     }
 
     public triggerResize(): void {

@@ -1,8 +1,7 @@
 <div>
-    <button (click)="switchActive()">Switch Active</button>
     <button (click)="randomizeSize()">Randomize Size</button>
     <button (click)="triggerResize()">Trigger Resize</button>
 </div>
-<div [style]="{width: (fullWidth) ? '50%' : '256px', border: '1px solid black'}">
-    <lib-image-merge-frontend [layerObjects]="layerObjects"></lib-image-merge-frontend>
+<div [style]="{width: (fullWidth) ? '50%' : '600px', border: '1px solid black'}">
+    <lib-image-merge-frontend [layerImage]="layerImage"></lib-image-merge-frontend>
 </div>

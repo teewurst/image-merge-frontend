@@ -1,16 +1,8 @@
-<div class="image-merge-frontend" #imageMergeFrontend>
-    <div class="image-merge-frontend--layer-object" *ngFor="let layerObject of layerObjects">
-        <img class="image-merge-frontend--image"
-             *ngFor="let image of layerObject.images"
-             [src]="image.url"
-             [ngStyle]="{
-                position: 'absolute',
-                top: image.offset.y * ratio + 'px',
-                left: image.offset.x * ratio + 'px',
-                height: image.size.y * ratio + 'px',
-                width: image.size.x * ratio + 'px'
-              }"
-             [ngClass]="{active: image.active}"
-        />
+<ng-container>
+    <lib-breadcrumb-navigation (onBreadcrumbClick)="handleIconClick($event)"
+                               [externalEventEmitter]="changeActiveLayer"></lib-breadcrumb-navigation>
+    <div class="image-merge-frontend" [ngStyle]="{'padding-top': '133.33333%'}" #imageMergeFrontend>
+        <lib-image-layer [layerImage]="layerImage" [ratio]="ratio"
+                         (onIconClick)="this.handleIconClick($event)"></lib-image-layer>
     </div>
-</div>
+</ng-container>
