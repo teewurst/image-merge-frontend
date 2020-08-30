@@ -6,20 +6,40 @@
   margin:  4px 0 0 4px;
 
   &__breadcrumb {
-    cursor: pointer;
+    text-decoration: underline;
 
-    &:after {
-      content: '|';
-      padding-left: 6px;
-      padding-right: 6px;
+    &:hover {
+      cursor: pointer;
+      color: grey;
     }
 
-    &:last-child {
-      &:after {
-        content: '';
-        padding-left: 0;
-        padding-right: 0;
+    &:last-of-type{
+      text-decoration: none;
+      &:hover {
+        cursor: default;
+        color: initial;
       }
+    }
+  }
+
+  &__menu, &__back {
+    color: black;
+
+    &:hover {
+      cursor: pointer;
+      color: grey;
+    }
+
+  }
+  &__separator {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  &__chevron {
+    padding-left: 6px;
+    padding-right: 6px;
+    &:last-of-type {
+      display: none;
     }
   }
 }

@@ -1,10 +1,10 @@
 <div class="layer-image">
     <ng-container *ngFor="let subLayerImage of layerImage.images">
-        <lib-image-layer [layerImage]="subLayerImage" [ratio]="ratio" (onIconClick)="onIconClick.emit($event)"></lib-image-layer>
+        <lib-image-layer [layerImage]="subLayerImage" [ratio]="ratio" (iconClick)="iconClick.emit($event)"></lib-image-layer>
         <lib-image-icon
-            *ngIf="layerImage.active && subLayerImage.icon"
+            *ngIf="config.getShowIcons() && layerImage.active && subLayerImage.icon"
             [icon]="subLayerImage.icon" [ratio]="ratio"
-            (click)="this.onIconClick.emit(subLayerImage)"
+            (click)="this.iconClick.emit(subLayerImage)"
         ></lib-image-icon>
     </ng-container>
 

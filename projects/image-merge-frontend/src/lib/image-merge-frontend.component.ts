@@ -13,6 +13,10 @@ import {
 import {LayerImage} from 'projects/image-merge-frontend/src/lib/models/layer-object.interface';
 import {Subject, Subscription} from 'rxjs';
 import {distinctUntilChanged, throttleTime} from 'rxjs/operators';
+import {
+    ConfigService,
+    ImageMergeFrondendConfigInterface
+} from "projects/image-merge-frontend/src/lib/services/config.service";
 
 @Component({
     selector: 'lib-image-merge-frontend',
@@ -21,7 +25,6 @@ import {distinctUntilChanged, throttleTime} from 'rxjs/operators';
 })
 export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    public relativeHeightBase = 800;
     public ratio: number;
     private activeLayer: LayerImage;
 
@@ -45,7 +48,7 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
         this.resizeThrottle$.next(event);
     }
 
-    constructor() {
+    constructor(public config: ConfigService) {
     }
 
     public ngOnInit(): void {
@@ -56,13 +59,13 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
                     distinctUntilChanged()
                 )
                 .subscribe(() => {
-                    this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.relativeHeightBase;
+                    this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y;
                 })
         );
     }
 
     public ngAfterViewInit(): void {
-        this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.relativeHeightBase;
+        this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y;
         this.activeLayer = this.layerImage;
         this.changeActiveLayer.emit(this.layerImage);
     }
@@ -72,7 +75,7 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
         this.resizeThrottle$.complete();
     }
 
-    public handleIconClick(layerImage: LayerImage): void {
+    public onIconClick(layerImage: LayerImage): void {
         this.activeLayer.active = false;
         this.activeLayer = layerImage;
         this.activeLayer.active = true;

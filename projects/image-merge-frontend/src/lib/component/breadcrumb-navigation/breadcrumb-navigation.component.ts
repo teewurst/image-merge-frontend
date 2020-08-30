@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ReplaySubject, Subscription} from "rxjs";
 import {LayerImage} from "projects/image-merge-frontend/src/lib/models/layer-object.interface";
+import {faCamera} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: 'lib-breadcrumb-navigation',
@@ -8,11 +9,13 @@ import {LayerImage} from "projects/image-merge-frontend/src/lib/models/layer-obj
     styleUrls: ['./breadcrumb-navigation.component.less']
 })
 export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
-
     @Input()
     private externalEventEmitter: EventEmitter<LayerImage>;
     @Output()
-    private onBreadcrumbClick: EventEmitter<LayerImage> = new EventEmitter<LayerImage>();
+    private breadcrumbClick: EventEmitter<LayerImage> = new EventEmitter<LayerImage>();
+    @Output()
+    public menuClickEmitter: EventEmitter<void> = new EventEmitter<void>();
+
     private eventSubscription: Subscription;
     public layerImages: LayerImage[] = [];
 
@@ -24,11 +27,11 @@ export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
           this.layerImages.pop();
         }
         this.layerImages.pop();
-        this.onBreadcrumbClick.emit(layerImage);
+        this.breadcrumbClick.emit(layerImage);
     }
 
     public ngOnInit(): void {
-        this.externalEventEmitter.subscribe((layerImage: LayerImage) => {
+        this.eventSubscription = this.externalEventEmitter.subscribe((layerImage: LayerImage) => {
             this.layerImages.push(layerImage);
         });
     }

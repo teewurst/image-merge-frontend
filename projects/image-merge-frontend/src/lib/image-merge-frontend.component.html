@@ -1,8 +1,10 @@
 <ng-container>
-    <lib-breadcrumb-navigation (onBreadcrumbClick)="handleIconClick($event)"
-                               [externalEventEmitter]="changeActiveLayer"></lib-breadcrumb-navigation>
-    <div class="image-merge-frontend" [ngStyle]="{'padding-top': '133.33333%'}" #imageMergeFrontend>
+    <lib-breadcrumb-navigation
+            *ngIf="config.getShowMenu()"
+            (breadcrumbClick)="onIconClick($event)"
+            [externalEventEmitter]="changeActiveLayer"></lib-breadcrumb-navigation>
+    <div class="image-merge-frontend" [ngStyle]="{'padding-top': config.getHeightWidthRatio() * 100 + '%'}" #imageMergeFrontend>
         <lib-image-layer [layerImage]="layerImage" [ratio]="ratio"
-                         (onIconClick)="this.handleIconClick($event)"></lib-image-layer>
+                         (iconClick)="this.onIconClick($event)"></lib-image-layer>
     </div>
 </ng-container>

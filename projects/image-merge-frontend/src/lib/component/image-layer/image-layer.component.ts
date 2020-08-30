@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LayerImage} from 'projects/image-merge-frontend/src/lib/models/layer-object.interface';
+import {ConfigService} from "projects/image-merge-frontend/src/lib/services/config.service";
 
 @Component({
     selector: 'lib-image-layer',
@@ -13,9 +14,9 @@ export class ImageLayerComponent implements OnInit {
     public ratio: number;
 
     @Output()
-    public onIconClick: EventEmitter<LayerImage> = new EventEmitter<LayerImage>();
+    public iconClick: EventEmitter<LayerImage> = new EventEmitter<LayerImage>();
 
-    constructor() {
+    constructor(public config: ConfigService) {
     }
 
     ngOnInit(): void {
