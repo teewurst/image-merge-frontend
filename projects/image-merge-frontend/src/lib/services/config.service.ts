@@ -3,7 +3,7 @@ import {Coordinates} from 'projects/image-merge-frontend/src/lib/models/layer-ob
 
 export const IMAGE_MERGE_FRONTEND_CONFIG_TOKEN: InjectionToken<ConfigService> = new InjectionToken<ConfigService>('IMAGE_MERGE_FRONTEND_CONFIG_TOKEN');
 
-export interface ImageMergeFrondendConfigInterface {
+export interface ImageMergeFrontendConfigInterface {
     plainSize?: Coordinates;
     showMenu?: boolean;
     showIcons?: boolean;
@@ -14,11 +14,11 @@ export interface ImageMergeFrondendConfigInterface {
 export class ConfigService {
     private heightWidthRatio: number;
 
-    constructor(@Inject(IMAGE_MERGE_FRONTEND_CONFIG_TOKEN) private config: ImageMergeFrondendConfigInterface = {}) {
+    constructor(@Inject(IMAGE_MERGE_FRONTEND_CONFIG_TOKEN) private config: ImageMergeFrontendConfigInterface = {}) {
         this.setConfig(config);
     }
 
-    public setConfig(config: ImageMergeFrondendConfigInterface): void {
+    public setConfig(config: ImageMergeFrontendConfigInterface): void {
         this.config = config;
         this.heightWidthRatio = this.getPlainSize().y / this.getPlainSize().x;
     }

@@ -9,7 +9,7 @@ import {fas} from '@fortawesome/free-solid-svg-icons';
 import {far} from '@fortawesome/free-regular-svg-icons';
 import {
     ConfigService, IMAGE_MERGE_FRONTEND_CONFIG_TOKEN,
-    ImageMergeFrondendConfigInterface
+    ImageMergeFrontendConfigInterface
 } from "projects/image-merge-frontend/src/lib/services/config.service";
 
 
@@ -31,7 +31,7 @@ export class ImageMergeFrontendModule {
         library.addIconPacks(fas, far);
     }
 
-    static forRoot(config: ImageMergeFrondendConfigInterface): ModuleWithProviders<ImageMergeFrontendModule> {
+    static forRoot(config: ImageMergeFrontendConfigInterface): ModuleWithProviders<ImageMergeFrontendModule> {
         return {
             ngModule: ImageMergeFrontendModule,
             providers: [

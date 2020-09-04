@@ -15,7 +15,7 @@ import {Subject, Subscription} from 'rxjs';
 import {distinctUntilChanged, throttleTime} from 'rxjs/operators';
 import {
     ConfigService,
-    ImageMergeFrondendConfigInterface
+    ImageMergeFrontendConfigInterface
 } from "projects/image-merge-frontend/src/lib/services/config.service";
 
 @Component({
