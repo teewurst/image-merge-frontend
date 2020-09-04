@@ -13,10 +13,7 @@ import {
 import {LayerImage} from 'projects/image-merge-frontend/src/lib/models/layer-object.interface';
 import {Subject, Subscription} from 'rxjs';
 import {distinctUntilChanged, throttleTime} from 'rxjs/operators';
-import {
-    ConfigService,
-    ImageMergeFrontendConfigInterface
-} from "projects/image-merge-frontend/src/lib/services/config.service";
+import {ConfigService} from 'projects/image-merge-frontend/src/lib/services/config.service';
 
 @Component({
     selector: 'lib-image-merge-frontend',

@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ReplaySubject, Subscription} from "rxjs";
-import {LayerImage} from "projects/image-merge-frontend/src/lib/models/layer-object.interface";
-import {faCamera} from "@fortawesome/free-solid-svg-icons";
+import {Subscription} from 'rxjs';
+import {LayerImage} from 'projects/image-merge-frontend/src/lib/models/layer-object.interface';
 
 @Component({
     selector: 'lib-breadcrumb-navigation',

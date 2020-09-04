@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BreadcrumbNavigationComponent } from './breadcrumb-navigation.component';
+import {BreadcrumbNavigationComponent} from './breadcrumb-navigation.component';
 
 describe('BreadcrumbNavigationComponent', () => {
   let component: BreadcrumbNavigationComponent;

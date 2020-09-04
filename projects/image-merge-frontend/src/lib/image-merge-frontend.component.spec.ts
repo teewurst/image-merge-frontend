@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ImageMergeFrontendComponent } from './image-merge-frontend.component';
+import {ImageMergeFrontendComponent} from './image-merge-frontend.component';
 
 describe('ImageMergeFrontendComponent', () => {
   let component: ImageMergeFrontendComponent;
