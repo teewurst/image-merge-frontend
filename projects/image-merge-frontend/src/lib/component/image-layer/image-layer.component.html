@@ -1,14 +1,27 @@
 <div class="layer-image">
     <ng-container *ngFor="let subLayerImage of layerImage.images">
-        <lib-image-layer [layerImage]="subLayerImage" [ratio]="ratio" (iconClick)="iconClick.emit($event)"></lib-image-layer>
+        <lib-image-layer
+                [layerImage]="subLayerImage"
+                [ratio]="ratio"
+                (activeHoverIconChange)="activeHoverIcon = $event"
+                [activeHoverIcon]="(activeHoverIcon && subLayerImage.id !== activeHoverIcon.id) ? subLayerImage : null"
+                (iconClick)="activeHoverIcon = null; iconClick.emit($event)"
+        ></lib-image-layer>
         <lib-image-icon
-            *ngIf="config.getShowIcons() && layerImage.active && subLayerImage.icon"
+                class="layer-image__icon"
+            [ngStyle]="{
+                display: (config.getShowIcons() && layerImage.active && subLayerImage.icon) ? 'block' : 'none',
+                opacity: (activeHoverIcon === null) ? 1 : 0.7
+            }"
+            [ngClass]="getAnimatedClass(subLayerImage)"
             [icon]="subLayerImage.icon" [ratio]="ratio"
-            (click)="this.iconClick.emit(subLayerImage)"
+            (click)="activeHoverIcon = null; iconClick.emit(subLayerImage)"
+            (mouseenter)="activeHoverIcon = subLayerImage"
+            (mouseleave)="activeHoverIcon = null"
         ></lib-image-icon>
     </ng-container>
 
-    <img class="layer-image--image"
+    <img class="layer-image__image"
          *ngIf="layerImage.url"
          [src]="layerImage.url"
          [alt]="layerImage.name"
@@ -17,7 +30,8 @@
                 top: layerImage.offset.y * ratio + 'px',
                 left: layerImage.offset.x * ratio + 'px',
                 height: layerImage.size.y * ratio + 'px',
-                width: layerImage.size.x * ratio + 'px'
+                width: layerImage.size.x * ratio + 'px',
+                opacity: (activeHoverIcon === null) ? 1 : 0.7
               }"
     />
 </div>

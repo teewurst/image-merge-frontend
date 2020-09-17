@@ -2,8 +2,10 @@
 
 .image-icon {
   #mixin.icon();
+  transition: transform .2s ease-in-out;
 
   &:hover {
     cursor: pointer;
+    transform:  scale(1.1);
   }
 }
