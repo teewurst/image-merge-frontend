@@ -1,5 +1,11 @@
 name: 'continuous integration workflows'
-on: 'push'
+on: 
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      createDist:
+        description: 'Should I create a dist branch for checkout?'
 
 jobs:
   build:
@@ -9,7 +15,8 @@ jobs:
         node-version: [12.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Cache node modules
         uses: actions/cache@v1
@@ -24,7 +31,20 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: npm ci and npm run build
+      - name: Build Artefact
         run: |
           npm ci
           npm run build:ci
+          
+      - name: Create Dist Branch
+        if: github.ref == 'refs/heads/master' || github.event.inputs.createDist == 1
+        run: |
+          cd dist
+          git init
+          git remote add origin git@github.com:teewurst/image-merge-frontend.git
+          git checkout -B "dist/${GITHUB_REF#refs/heads/}"
+          git config user.name deploygithub-actions
+          git config user.email deploy@rerp.de
+          git add .
+          git commit -m "[BUILD] Automatically generated"
+          git push -u origin "dist/${GITHUB_REF#refs/heads/}"
