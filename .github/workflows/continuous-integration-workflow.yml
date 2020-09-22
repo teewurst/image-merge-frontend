@@ -50,3 +50,7 @@ jobs:
           git add .
           git commit -m "[BUILD] Automatically generated"
           git push -u origin "dist/${GITHUB_REF#refs/heads/}"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.IMAGE_MERGE_FRONTEND_BUILD_SECRET }}
