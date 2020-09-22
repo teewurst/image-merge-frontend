@@ -49,4 +49,4 @@ jobs:
           git config user.email deploy@rerp.de
           git add .
           git commit -m "[BUILD] Automatically generated"
-          git push -u origin "dist/${GITHUB_REF#refs/heads/}"
+          git push -fu origin "dist/${GITHUB_REF#refs/heads/}"
