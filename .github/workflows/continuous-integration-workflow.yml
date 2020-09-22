@@ -43,14 +43,10 @@ jobs:
         run: |
           cd dist
           git init
-          git remote add origin git@github.com:teewurst/image-merge-frontend.git
+          git remote add origin https://${{ secrets.IMAGE_MERGE_FRONTEND_BUILD_SECRET }}@github.com/teewurst/image-merge-frontend.git
           git checkout -B "dist/${GITHUB_REF#refs/heads/}"
           git config user.name deploygithub-actions
           git config user.email deploy@rerp.de
           git add .
           git commit -m "[BUILD] Automatically generated"
           git push -u origin "dist/${GITHUB_REF#refs/heads/}"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.IMAGE_MERGE_FRONTEND_BUILD_SECRET }}
