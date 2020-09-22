@@ -41,7 +41,7 @@ jobs:
       - name: Create Dist Branch
         if: github.ref == 'refs/heads/master' || github.event.inputs.createDist == 1
         run: |
-          cd dist
+          cd dist/${PWD##*/}
           git init
           git remote add origin https://${{ secrets.IMAGE_MERGE_FRONTEND_BUILD_SECRET }}@github.com/teewurst/image-merge-frontend.git
           git checkout -B "dist/${GITHUB_REF#refs/heads/}"
