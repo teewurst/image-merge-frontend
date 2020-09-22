@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.IMAGE_MERGE_FRONTEND_BUILD_SECRET }}'
+          token: ${{ secrets.IMAGE_MERGE_FRONTEND_BUILD_SECRET }}
         
       - name: Cache node modules
         uses: actions/cache@v1
