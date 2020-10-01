@@ -2,6 +2,9 @@ export interface LayerImage {
   id: number;
   name: string;
   active: boolean;
+  volatileUuid: string;
+  typeId: number;
+  consistsOf: number[];
   url?: string;
   size?: Coordinates;
   offset?: Coordinates;
