@@ -11,6 +11,9 @@ export class AppComponent {
 
     fullWidth = false;
     public layerImage: LayerImage = {
+        volatileUuid: '',
+        typeId: 2,
+        consistsOf: [],
         id: 0,
         name: 'Scene Face',
         active: true,
