@@ -11,7 +11,7 @@ import {
     ConfigService,
     IMAGE_MERGE_FRONTEND_CONFIG_TOKEN,
     ImageMergeFrontendConfigInterface
-} from 'projects/image-merge-frontend/src/lib/services/config.service';
+} from './services/config.service';
 
 
 @NgModule({

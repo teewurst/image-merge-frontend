@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LayerImage} from 'projects/image-merge-frontend/src/lib/models/layer-object.interface';
-import {ConfigService} from 'projects/image-merge-frontend/src/lib/services/config.service';
+import {ConfigService} from '../../services/config.service';
 
 @Component({
     selector: 'lib-image-layer',
