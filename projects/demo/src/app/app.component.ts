@@ -16,6 +16,9 @@ export class AppComponent {
         active: true,
         images: [
             {
+                volatileUuid: '',
+                typeId: 2,
+                consistsOf: [],
                 id: 1,
                 name: 'Body Background',
                 url: '/assets/body.png',
@@ -41,6 +44,9 @@ export class AppComponent {
                 active: false,
             },
             {
+                volatileUuid: '',
+                typeId: 2,
+                consistsOf: [],
                 id: 2,
                 name: 'Face',
                 active: false,
@@ -53,6 +59,9 @@ export class AppComponent {
                 },
                 images: [
                     {
+                        volatileUuid: '',
+                        typeId: 2,
+                        consistsOf: [],
                         url: '/assets/mouth.png',
                         id: 0,
                         name: 'Mouth',
@@ -78,6 +87,9 @@ export class AppComponent {
                         active: false
                     },
                     {
+                        volatileUuid: '',
+                        typeId: 2,
+                        consistsOf: [],
                         url: '/assets/eyes.png',
                         id: 1,
                         name: 'eyes',
