@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Icon} from 'projects/image-merge-frontend/src/lib/models/layer-object.interface';
+import {Icon} from '../../models/layer-object.interface';
 
 @Component({
   selector: 'lib-image-icon',

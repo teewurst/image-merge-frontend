@@ -1,4 +1,5 @@
 <div class="image-icon"
+     *ngIf="icon && icon.offset"
      [ngStyle]="{
  position: 'absolute',
      left: icon.offset.x * ratio + 'px',

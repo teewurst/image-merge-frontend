@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LayerImage} from 'projects/image-merge-frontend/src/lib/models/layer-object.interface';
+import {LayerImage} from '../../../image-merge-frontend/src/lib/models/layer-object.interface';
 
 @Component({
     selector: 'app-root',

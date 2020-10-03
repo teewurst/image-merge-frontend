@@ -1,5 +1,5 @@
 import {Inject, Injectable, InjectionToken} from '@angular/core';
-import {Coordinates} from 'projects/image-merge-frontend/src/lib/models/layer-object.interface';
+import {Coordinates} from '../models/layer-object.interface';
 
 export const IMAGE_MERGE_FRONTEND_CONFIG_TOKEN: InjectionToken<ConfigService> = new InjectionToken<ConfigService>('IMAGE_MERGE_FRONTEND_CONFIG_TOKEN');
 

@@ -10,7 +10,7 @@ import {
     Output,
     ViewChild
 } from '@angular/core';
-import {LayerImage} from 'projects/image-merge-frontend/src/lib/models/layer-object.interface';
+import {LayerImage} from './models/layer-object.interface';
 import {Subject, Subscription} from 'rxjs';
 import {distinctUntilChanged, throttleTime} from 'rxjs/operators';
 import {ConfigService} from './services/config.service';
@@ -62,7 +62,7 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     }
 
     public ngAfterViewInit(): void {
-        this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y;
+        setTimeout(() => this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y);
         this.activeLayer = this.layerImage;
         this.changeActiveLayer.emit(this.layerImage);
     }

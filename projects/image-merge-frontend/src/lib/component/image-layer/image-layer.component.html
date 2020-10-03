@@ -1,4 +1,4 @@
-<div class="layer-image">
+<div class="layer-image" *ngIf="layerImage && layerImage.images">
     <ng-container *ngFor="let subLayerImage of layerImage.images">
         <lib-image-layer
                 [layerImage]="subLayerImage"

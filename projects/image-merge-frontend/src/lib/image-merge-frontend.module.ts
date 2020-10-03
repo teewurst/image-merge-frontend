@@ -12,13 +12,14 @@ import {
     IMAGE_MERGE_FRONTEND_CONFIG_TOKEN,
     ImageMergeFrontendConfigInterface
 } from './services/config.service';
+import {IconsModule} from './icons/icons.module';
 
 
 @NgModule({
     declarations: [ImageMergeFrontendComponent, ImageLayerComponent, ImageIconComponent, BreadcrumbNavigationComponent],
     imports: [
         CommonModule,
-        FontAwesomeModule
+        IconsModule
     ],
     providers: [
         ConfigService,
@@ -27,10 +28,6 @@ import {
     exports: [ImageMergeFrontendComponent]
 })
 export class ImageMergeFrontendModule {
-    constructor(library: FaIconLibrary) {
-        // todo: Refactor to used icons
-        library.addIconPacks(fas, far);
-    }
 
     static forRoot(config: ImageMergeFrontendConfigInterface): ModuleWithProviders<ImageMergeFrontendModule> {
         return {

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {LayerImage} from 'projects/image-merge-frontend/src/lib/models/layer-object.interface';
+import {LayerImage} from '../../models/layer-object.interface';
 
 @Component({
     selector: 'lib-breadcrumb-navigation',
@@ -9,7 +9,7 @@ import {LayerImage} from 'projects/image-merge-frontend/src/lib/models/layer-obj
 })
 export class BreadcrumbNavigationComponent implements OnInit, OnDestroy {
     @Input()
-    private externalEventEmitter: EventEmitter<LayerImage>;
+    private externalEventEmitter: EventEmitter<LayerImage> = new EventEmitter<LayerImage>();
     @Output()
     private breadcrumbClick: EventEmitter<LayerImage> = new EventEmitter<LayerImage>();
     @Output()
