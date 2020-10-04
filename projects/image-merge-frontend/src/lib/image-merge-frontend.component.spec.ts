@@ -7,6 +7,7 @@ import {BreadcrumbNavigationComponent} from "./component/breadcrumb-navigation/b
 import {CommonModule} from "@angular/common";
 import {ConfigService, IMAGE_MERGE_FRONTEND_CONFIG_TOKEN} from "./services/config.service";
 import {IconsModule} from './icons/icons.module';
+import {layerImageMock} from '../../../demo/src/app/app.mock';
 
 describe('ImageMergeFrontendComponent', () => {
   let component: ImageMergeFrontendComponent;
@@ -30,10 +31,15 @@ describe('ImageMergeFrontendComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ImageMergeFrontendComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create w/o data', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should create with valid data', () => {
+    component.layerImage = layerImageMock;
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 });

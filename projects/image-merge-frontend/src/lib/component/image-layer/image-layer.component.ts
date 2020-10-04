@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ConfigService} from '../../services/config.service';
-import {LayerImage} from '../../models/layer-object.interface';
+import {LayerCoordinates, LayerImage} from '../../models/layer-object.interface';
+
 
 @Component({
     selector: 'lib-image-layer',
@@ -10,6 +11,8 @@ import {LayerImage} from '../../models/layer-object.interface';
 export class ImageLayerComponent implements OnInit {
     @Input()
     public layerImage: LayerImage;
+    @Input()
+    public parentLayerOffset: LayerCoordinates = {x: 0, y: 0};
     @Input()
     public ratio: number;
     @Input()

@@ -1,10 +1,10 @@
 import {Inject, Injectable, InjectionToken} from '@angular/core';
-import {Coordinates} from '../models/layer-object.interface';
+import {LayerCoordinates} from '../models/layer-object.interface';
 
 export const IMAGE_MERGE_FRONTEND_CONFIG_TOKEN: InjectionToken<ConfigService> = new InjectionToken<ConfigService>('IMAGE_MERGE_FRONTEND_CONFIG_TOKEN');
 
 export interface ImageMergeFrontendConfigInterface {
-    plainSize?: Coordinates;
+    plainSize?: LayerCoordinates;
     showMenu?: boolean;
     showIcons?: boolean;
 
@@ -23,7 +23,7 @@ export class ConfigService {
         this.heightWidthRatio = this.getPlainSize().y / this.getPlainSize().x;
     }
 
-    public getPlainSize(): Coordinates {
+    public getPlainSize(): LayerCoordinates {
         return this.config.plainSize || {x: 600, y: 800};
     }
 

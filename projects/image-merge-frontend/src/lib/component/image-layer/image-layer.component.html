@@ -1,4 +1,4 @@
-<div class="layer-image" *ngIf="layerImage && layerImage.images">
+<div class="layer-image" *ngIf="layerImage">
     <ng-container *ngFor="let subLayerImage of layerImage.images">
         <lib-image-layer
                 [layerImage]="subLayerImage"
@@ -6,6 +6,7 @@
                 (activeHoverIconChange)="activeHoverIcon = $event"
                 [activeHoverIcon]="(activeHoverIcon && subLayerImage.id !== activeHoverIcon.id) ? subLayerImage : null"
                 (iconClick)="activeHoverIcon = null; iconClick.emit($event)"
+                [parentLayerOffset]="layerImage.subLayerOffset || {x: 0, y: 0}"
         ></lib-image-layer>
         <lib-image-icon
                 class="layer-image__icon"
@@ -27,8 +28,8 @@
          [alt]="layerImage.name"
          [ngStyle]="{
                 position: 'absolute',
-                top: layerImage.offset.y * ratio + 'px',
-                left: layerImage.offset.x * ratio + 'px',
+                top: (layerImage.offset.y * ratio + parentLayerOffset.y * ratio) + 'px',
+                left: (layerImage.offset.x * ratio + parentLayerOffset.x * ratio) + 'px',
                 height: layerImage.size.y * ratio + 'px',
                 width: layerImage.size.x * ratio + 'px',
                 opacity: (activeHoverIcon === null) ? 1 : 0.7

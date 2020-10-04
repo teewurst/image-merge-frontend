@@ -6,20 +6,21 @@ export interface LayerImage {
   consistsOf: number[];
   volatileUuid?: string;
   url?: string;
-  size?: Coordinates;
-  offset?: Coordinates;
-  actualSize?: Coordinates;
+  size?: LayerCoordinates;
+  offset?: LayerCoordinates;
+  subLayerOffset?: LayerCoordinates;
+  actualSize?: LayerCoordinates;
   images?: LayerImage[];
   icon?: Icon;
 }
 
-export interface Coordinates {
+export interface LayerCoordinates {
   x: number;
   y: number;
 }
 
 export interface Icon {
-  offset: Coordinates;
+  offset: LayerCoordinates;
   display: string | number;
   shortMessage?: string;
   tooltip?: string;
