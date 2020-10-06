@@ -1,12 +1,14 @@
-export const layerImageMock = {
+import {LayerImage} from "../../../image-merge-frontend/src/lib/models/layer-object.interface";
+
+export const layerImageMock: LayerImage = {
     volatileUuid: '',
     typeId: 2,
     consistsOf: [],
     id: 0,
     name: 'Scene Face',
     active: true,
-    images: [
-        {
+    images: {
+        1: {
             volatileUuid: '',
             typeId: 2,
             consistsOf: [],
@@ -34,7 +36,7 @@ export const layerImageMock = {
             },
             active: false,
         },
-        {
+        2: {
             volatileUuid: '',
             typeId: 2,
             consistsOf: [],
@@ -48,8 +50,8 @@ export const layerImageMock = {
                 },
                 display: 'Face',
             },
-            images: [
-                {
+            images: {
+                3: {
                     volatileUuid: '',
                     typeId: 2,
                     consistsOf: [],
@@ -77,7 +79,7 @@ export const layerImageMock = {
                     },
                     active: false
                 },
-                {
+                4: {
                     volatileUuid: '',
                     typeId: 2,
                     consistsOf: [],
@@ -105,7 +107,7 @@ export const layerImageMock = {
                     },
                     active: false
                 }
-            ]
+            }
         },
-    ]
+    }
 };

@@ -45,4 +45,8 @@ export class ImageLayerComponent implements OnInit {
 
         return classMap;
     }
+
+    public doNotSort(): number {
+        return 0;
+    }
 }

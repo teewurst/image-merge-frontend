@@ -10,7 +10,7 @@ export interface LayerImage {
   offset?: LayerCoordinates;
   subLayerOffset?: LayerCoordinates;
   actualSize?: LayerCoordinates;
-  images?: LayerImage[];
+  images?: {[key: number]: LayerImage };
   icon?: Icon;
 }
 

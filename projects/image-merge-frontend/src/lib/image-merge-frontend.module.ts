@@ -4,9 +4,6 @@ import {CommonModule} from '@angular/common';
 import {ImageLayerComponent} from './component/image-layer/image-layer.component';
 import {ImageIconComponent} from './component/image-icon/image-icon.component';
 import {BreadcrumbNavigationComponent} from './component/breadcrumb-navigation/breadcrumb-navigation.component';
-import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {fas} from '@fortawesome/free-solid-svg-icons';
-import {far} from '@fortawesome/free-regular-svg-icons';
 import {
     ConfigService,
     IMAGE_MERGE_FRONTEND_CONFIG_TOKEN,

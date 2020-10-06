@@ -1,24 +1,26 @@
 <div class="layer-image" *ngIf="layerImage">
-    <ng-container *ngFor="let subLayerImage of layerImage.images">
+    <ng-container *ngFor="let subLayerImage of (layerImage.images | keyvalue : doNotSort)">
         <lib-image-layer
-                [layerImage]="subLayerImage"
+                [layerImage]="subLayerImage.value"
                 [ratio]="ratio"
                 (activeHoverIconChange)="activeHoverIcon = $event"
-                [activeHoverIcon]="(activeHoverIcon && subLayerImage.id !== activeHoverIcon.id) ? subLayerImage : null"
+                [activeHoverIcon]="(activeHoverIcon && subLayerImage.value.id !== activeHoverIcon.id) ? subLayerImage.value : null"
                 (iconClick)="activeHoverIcon = null; iconClick.emit($event)"
                 [parentLayerOffset]="layerImage.subLayerOffset || {x: 0, y: 0}"
         ></lib-image-layer>
         <lib-image-icon
                 class="layer-image__icon"
-            [ngStyle]="{
-                display: (config.getShowIcons() && layerImage.active && subLayerImage.icon) ? 'block' : 'none',
-                opacity: (activeHoverIcon === null) ? 1 : 0.7
-            }"
-            [ngClass]="getAnimatedClass(subLayerImage)"
-            [icon]="subLayerImage.icon" [ratio]="ratio"
-            (click)="activeHoverIcon = null; iconClick.emit(subLayerImage)"
-            (mouseenter)="activeHoverIcon = subLayerImage"
-            (mouseleave)="activeHoverIcon = null"
+                *ngIf="subLayerImage.value.icon"
+                [ngStyle]="{
+                    display: (config.getShowIcons() && layerImage.active && subLayerImage.value.icon) ? 'block' : 'none',
+                    opacity: (activeHoverIcon === null) ? 1 : 0.7
+                }"
+                [ngClass]="getAnimatedClass(subLayerImage.value)"
+                [icon]="subLayerImage.value.icon"
+                [ratio]="ratio"
+                (click)="activeHoverIcon = null; iconClick.emit(subLayerImage.value)"
+                (mouseenter)="activeHoverIcon = subLayerImage.value"
+                (mouseleave)="activeHoverIcon = null"
         ></lib-image-icon>
     </ng-container>
 
