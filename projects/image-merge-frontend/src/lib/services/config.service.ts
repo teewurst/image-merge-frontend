@@ -36,6 +36,6 @@ export class ConfigService {
     }
 
     public getHeightWidthRatio(): number {
-        return this.heightWidthRatio;
+        return this.heightWidthRatio || this.getPlainSize().y / this.getPlainSize().x;
     }
 }
