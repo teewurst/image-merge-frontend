@@ -12,7 +12,7 @@ export const layerImageMock: LayerImage = {
             volatileUuid: '',
             typeId: 2,
             consistsOf: [],
-            id: 1,
+            id: 2,
             name: 'Body Background',
             url: '/assets/body.png',
             size: {
@@ -40,7 +40,7 @@ export const layerImageMock: LayerImage = {
             volatileUuid: '',
             typeId: 2,
             consistsOf: [],
-            id: 2,
+            id: 3,
             name: 'Face',
             active: false,
             icon: {
@@ -56,7 +56,7 @@ export const layerImageMock: LayerImage = {
                     typeId: 2,
                     consistsOf: [],
                     url: '/assets/mouth.png',
-                    id: 0,
+                    id: 4,
                     name: 'Mouth',
                     size: {
                         x: 500,
@@ -84,7 +84,7 @@ export const layerImageMock: LayerImage = {
                     typeId: 2,
                     consistsOf: [],
                     url: '/assets/eyes.png',
-                    id: 1,
+                    id: 5,
                     name: 'eyes',
                     size: {
                         x: 500,
