@@ -1,4 +1,4 @@
-import {LayerImage} from "../../../image-merge-frontend/src/lib/models/layer-object.interface";
+import {LayerImage} from '../../../image-merge-frontend/src/lib/models/layer-object.interface';
 
 export const layerImageMock: LayerImage = {
     volatileUuid: '',

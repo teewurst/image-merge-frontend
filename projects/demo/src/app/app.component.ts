@@ -12,9 +12,12 @@ export class AppComponent implements OnInit {
 
     fullWidth = false;
     public layerImage: LayerImage;
+    public activeLayerImage: LayerImage;
+    public resetLayerImage: LayerImage;
 
     public ngOnInit(): void {
         this.layerImage = layerImageMock;
+        this.resetLayerImage = this.mergeDeep({}, this.layerImage);
     }
 
     public randomizeSize(): void {
@@ -41,5 +44,44 @@ export class AppComponent implements OnInit {
 
     public triggerResize(): void {
         this.fullWidth = !this.fullWidth;
+    }
+
+    public resetActive(): void {
+        this.layerImage = this.mergeDeep({}, this.resetLayerImage);
+        this.activeLayerImage = this.layerImage;
+    }
+
+    public isObject(item): boolean {
+        return (item && typeof item === 'object' && !Array.isArray(item));
+    }
+
+    public mergeDeep(target, ...sources): any {
+        if (!sources.length) {
+            return target;
+        }
+
+        const source = sources.shift();
+
+        if (this.isObject(target) && this.isObject(source)) {
+            for (const key in source) {
+
+                if (!source.hasOwnProperty(key)) {
+                    continue;
+                }
+
+                if (this.isObject(source[key])) {
+                    if (!target[key]) Object.assign(target, { [key]: {} });
+                    this.mergeDeep(target[key], source[key]);
+                } else {
+                    Object.assign(target, { [key]: source[key] });
+                }
+            }
+        }
+
+        return this.mergeDeep(target, ...sources);
+    }
+
+    public setActiveLayerImage($event: LayerImage): void {
+        this.activeLayerImage = $event;
     }
 }

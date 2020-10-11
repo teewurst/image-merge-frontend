@@ -10,7 +10,7 @@
         ></lib-image-layer>
         <lib-image-icon
                 class="layer-image__icon"
-                *ngIf="subLayerImage.value.icon"
+                *ngIf="config.getShowIcons() && subLayerImage.value.icon && layerImage.active"
                 [ngStyle]="{
                     display: (config.getShowIcons() && layerImage.active && subLayerImage.value.icon) ? 'block' : 'none',
                     opacity: (activeHoverIcon === null) ? 1 : 0.7

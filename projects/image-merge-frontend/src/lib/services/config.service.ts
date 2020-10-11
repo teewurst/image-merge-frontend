@@ -27,10 +27,6 @@ export class ConfigService {
         return this.config.plainSize || {x: 600, y: 800};
     }
 
-    public getShowMenu(): boolean {
-        return this.config.showMenu || true;
-    }
-
     public getShowIcons(): boolean {
         return this.config.showIcons || true;
     }

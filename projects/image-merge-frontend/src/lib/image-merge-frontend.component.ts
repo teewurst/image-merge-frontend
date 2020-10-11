@@ -23,12 +23,12 @@ import {ConfigService} from './services/config.service';
 export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public ratio: number;
-    private activeLayer: LayerImage;
 
     // Inputs Outputs
     @Input()
     public layerImage: LayerImage;
-
+    @Input()
+    public activeLayer: LayerImage;
     @Output()
     public changeActiveLayer: EventEmitter<LayerImage> = new EventEmitter<LayerImage>();
 

@@ -3,7 +3,6 @@ import {ImageMergeFrontendComponent} from './image-merge-frontend.component';
 import {CommonModule} from '@angular/common';
 import {ImageLayerComponent} from './component/image-layer/image-layer.component';
 import {ImageIconComponent} from './component/image-icon/image-icon.component';
-import {BreadcrumbNavigationComponent} from './component/breadcrumb-navigation/breadcrumb-navigation.component';
 import {
     ConfigService,
     IMAGE_MERGE_FRONTEND_CONFIG_TOKEN,
@@ -13,7 +12,7 @@ import {IconsModule} from './icons/icons.module';
 
 
 @NgModule({
-    declarations: [ImageMergeFrontendComponent, ImageLayerComponent, ImageIconComponent, BreadcrumbNavigationComponent],
+    declarations: [ImageMergeFrontendComponent, ImageLayerComponent, ImageIconComponent],
     imports: [
         CommonModule,
         IconsModule
