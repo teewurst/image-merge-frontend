@@ -49,4 +49,8 @@ export class ImageLayerComponent implements OnInit {
     public doNotSort(): number {
         return 0;
     }
+
+    public emitIconClick($event: LayerImage): void {
+        this.iconClick.emit($event);
+    }
 }

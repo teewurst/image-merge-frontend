@@ -52,7 +52,7 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
         this.subscriptions.push(
             this.resizeThrottle$
                 .pipe(
-                    throttleTime(100),
+                    throttleTime(80),
                     distinctUntilChanged()
                 )
                 .subscribe(() => {

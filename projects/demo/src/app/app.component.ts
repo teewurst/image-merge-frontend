@@ -13,11 +13,11 @@ export class AppComponent implements OnInit {
     fullWidth = false;
     public layerImage: LayerImage;
     public activeLayerImage: LayerImage;
-    public resetLayerImage: LayerImage;
+    public resetLayerImage: string;
 
     public ngOnInit(): void {
         this.layerImage = layerImageMock;
-        this.resetLayerImage = this.mergeDeep({}, this.layerImage);
+        this.resetLayerImage = JSON.stringify(this.layerImage);
     }
 
     public randomizeSize(): void {
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     }
 
     public resetActive(): void {
-        this.layerImage = this.mergeDeep({}, this.resetLayerImage);
+        this.layerImage = JSON.parse(this.resetLayerImage);
         this.activeLayerImage = this.layerImage;
     }
 
@@ -70,7 +70,9 @@ export class AppComponent implements OnInit {
                 }
 
                 if (this.isObject(source[key])) {
-                    if (!target[key]) Object.assign(target, { [key]: {} });
+                    if (!target[key]) {
+                        Object.assign(target, {[key]: {}});
+                    }
                     this.mergeDeep(target[key], source[key]);
                 } else {
                     Object.assign(target, { [key]: source[key] });
@@ -82,6 +84,7 @@ export class AppComponent implements OnInit {
     }
 
     public setActiveLayerImage($event: LayerImage): void {
+
         this.activeLayerImage = $event;
     }
 }

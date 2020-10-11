@@ -5,7 +5,7 @@
                 [ratio]="ratio"
                 (activeHoverIconChange)="activeHoverIcon = $event"
                 [activeHoverIcon]="(activeHoverIcon && subLayerImage.value.id !== activeHoverIcon.id) ? subLayerImage.value : null"
-                (iconClick)="activeHoverIcon = null; iconClick.emit($event)"
+                (iconClick)="activeHoverIcon = null; emitIconClick($event)"
                 [parentLayerOffset]="layerImage.subLayerOffset || {x: 0, y: 0}"
         ></lib-image-layer>
         <lib-image-icon
@@ -18,7 +18,7 @@
                 [ngClass]="getAnimatedClass(subLayerImage.value)"
                 [icon]="subLayerImage.value.icon"
                 [ratio]="ratio"
-                (click)="activeHoverIcon = null; iconClick.emit(subLayerImage.value)"
+                (click)="activeHoverIcon = null; emitIconClick(subLayerImage.value)"
                 (mouseenter)="activeHoverIcon = subLayerImage.value"
                 (mouseleave)="activeHoverIcon = null"
         ></lib-image-icon>
