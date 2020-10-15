@@ -67,7 +67,11 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     }
 
     public ngAfterViewInit(): void {
-        setTimeout(() => this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y);
+        setTimeout(() => {
+            this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y;
+            this.wrapperHeight = this.wrapperElement.nativeElement.offsetHeight;
+            this.wrapperWidth = this.wrapperElement.nativeElement.offsetWidth;
+        });
         this.activeLayer = this.layerImage;
         this.changeActiveLayer.emit(this.layerImage);
     }
