@@ -37,15 +37,18 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     private resizeThrottle$: Subject<Event> = new Subject<Event>();
 
     // Element Refs
-    @ViewChild('imageMergeFrontend')
-    public wrapperElement: ElementRef;
+    @ViewChild('imageMergeFrontendFiller')
+    public fillerElement: ElementRef;
+
+    public wrapperHeight: number;
+    public wrapperWidth: number;
 
     @HostListener('window:resize', ['$event'])
     public onResize(event: Event): void {
         this.resizeThrottle$.next(event);
     }
 
-    constructor(public config: ConfigService) {
+    constructor(public config: ConfigService, private wrapperElement: ElementRef) {
     }
 
     public ngOnInit(): void {
@@ -56,6 +59,8 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
                     distinctUntilChanged()
                 )
                 .subscribe(() => {
+                    this.wrapperHeight = this.wrapperElement.nativeElement.offsetHeight;
+                    this.wrapperWidth = this.wrapperElement.nativeElement.offsetWidth;
                     this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y;
                 })
         );
