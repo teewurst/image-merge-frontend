@@ -1,5 +1,5 @@
 <ng-container>
-    <div class="image-merge-frontend" [ngStyle]="{'height': wrapperHeight + 'px', width: wrapperHeight * (1/config.getHeightWidthRatio()) + 'px'}" #imageMergeFrontendFiller>
+    <div class="image-merge-frontend" [ngStyle]="this.getMergeStyle()" #imageMergeFrontendFiller>
         <lib-image-layer [layerImage]="layerImage" [ratio]="ratio"
                          (iconClick)="this.onIconClick($event)"></lib-image-layer>
     </div>

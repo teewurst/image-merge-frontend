@@ -2,7 +2,8 @@
     <button (click)="randomizeSize()">Randomize Size</button>
     <button (click)="triggerResize()">Trigger Resize</button>
     <button (click)="resetActive()">Reset Layers</button>
+    <button (click)="toggleHeight(height)">Toggle Height (is: {{height}})</button>
 </div>
-<div [style]="{width: (fullWidth) ? '100%' : '600px', 'height': (fullWidth) ? '100%' : '800px', border: '1px solid black', position: 'relative'}">
-    <lib-image-merge-frontend [layerImage]="layerImage" (changeActiveLayer)="setActiveLayerImage($event)"></lib-image-merge-frontend>
+<div [style]="{width: (!fullWidth) ? '100%' : '600px', 'height': height + 'px', border: '1px solid black', position: 'relative'}">
+    <lib-image-merge-frontend [layerImage]="layerImage" [resizeThrottled$]="resize$" (changeActiveLayer)="setActiveLayerImage($event)"></lib-image-merge-frontend>
 </div>

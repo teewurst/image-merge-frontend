@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LayerImage} from '../../../image-merge-frontend/src/lib/models/layer-object.interface';
 import {layerImageMock} from './app.mock';
+import {Subject} from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -14,6 +15,9 @@ export class AppComponent implements OnInit {
     public layerImage: LayerImage;
     public activeLayerImage: LayerImage;
     public resetLayerImage: string;
+    public height: number = 800;
+    private toggleHeights: number[] = [900, 700];
+    public resize$: Subject<any> = new Subject<any>();
 
     public ngOnInit(): void {
         this.layerImage = layerImageMock;
@@ -44,6 +48,7 @@ export class AppComponent implements OnInit {
 
     public triggerResize(): void {
         this.fullWidth = !this.fullWidth;
+        this.resize$.next(this.height * Math.random());
     }
 
     public resetActive(): void {
@@ -55,36 +60,13 @@ export class AppComponent implements OnInit {
         return (item && typeof item === 'object' && !Array.isArray(item));
     }
 
-    public mergeDeep(target, ...sources): any {
-        if (!sources.length) {
-            return target;
-        }
-
-        const source = sources.shift();
-
-        if (this.isObject(target) && this.isObject(source)) {
-            for (const key in source) {
-
-                if (!source.hasOwnProperty(key)) {
-                    continue;
-                }
-
-                if (this.isObject(source[key])) {
-                    if (!target[key]) {
-                        Object.assign(target, {[key]: {}});
-                    }
-                    this.mergeDeep(target[key], source[key]);
-                } else {
-                    Object.assign(target, { [key]: source[key] });
-                }
-            }
-        }
-
-        return this.mergeDeep(target, ...sources);
+    public setActiveLayerImage($event: LayerImage): void {
+        this.activeLayerImage = $event;
     }
 
-    public setActiveLayerImage($event: LayerImage): void {
-
-        this.activeLayerImage = $event;
+    public toggleHeight(height): void {
+        this.toggleHeights.push(height);
+        this.height = this.toggleHeights.shift();
+        this.resize$.next(this.height);
     }
 }

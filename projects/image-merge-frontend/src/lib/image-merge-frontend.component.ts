@@ -26,7 +26,7 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
 
     // Inputs Outputs
     @Input()
-    private resizeThrottled$: Subject<void> = new Subject<void>();
+    private resizeThrottled$: Subject<any> = new Subject<any>();
     @Input()
     public layerImage: LayerImage;
     @Input()
@@ -42,12 +42,12 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     @ViewChild('imageMergeFrontendFiller')
     public fillerElement: ElementRef;
 
-    public wrapperHeight: number;
-    public wrapperWidth: number;
+    public fillerHeight: number;
+    public fillerWidth: number;
 
     @HostListener('window:resize', ['$event'])
     public onResize(event: Event): void {
-        this.resizeThrottled$.next();
+        this.resizeThrottled$.next(event);
     }
 
     constructor(public config: ConfigService, private wrapperElement: ElementRef) {
@@ -76,9 +76,25 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     }
 
     public calcSize(): void {
-        this.ratio = this.wrapperElement.nativeElement.offsetHeight / (this.config.getPlainSize().y || 1);
-        this.wrapperHeight = this.wrapperElement.nativeElement.offsetHeight;
-        this.wrapperWidth = this.wrapperElement.nativeElement.offsetWidth;
+        setTimeout(() => {
+            const wrapperRatio = this.wrapperElement.nativeElement.offsetHeight / this.wrapperElement.nativeElement.offsetWidth;
+            const plainRatio = this.config.getHeightWidthRatio();
+
+            // if the ratio of the wrapper element sides
+            if (plainRatio <= wrapperRatio) {
+                // select height as base for ratio
+                this.fillerWidth = this.wrapperElement.nativeElement.offsetWidth;
+                this.ratio = this.config.getPlainSize().x / this.wrapperElement.nativeElement.offsetWidth;
+                this.fillerHeight = this.wrapperElement.nativeElement.offsetWidth * plainRatio;
+
+
+            } else {
+                // select width as base for ratio
+                this.fillerHeight = this.wrapperElement.nativeElement.offsetHeight;
+                this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y;
+                this.fillerWidth = this.wrapperElement.nativeElement.offsetHeight * (1 / plainRatio);
+            }
+        });
     }
 
     public onIconClick(layerImage: LayerImage): void {
@@ -88,4 +104,10 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
         this.changeActiveLayer.emit(this.activeLayer);
     }
 
+    public getMergeStyle(): object {
+        return {
+            height: this.fillerHeight + 'px',
+            width: this.fillerWidth  + 'px'
+        };
+    }
 }
