@@ -26,6 +26,8 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
 
     // Inputs Outputs
     @Input()
+    private resizeThrottled$: Subject<void> = new Subject<void>();
+    @Input()
     public layerImage: LayerImage;
     @Input()
     public activeLayer: LayerImage;
@@ -34,7 +36,7 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
 
     // Subscriptions
     private subscriptions: Subscription[] = [];
-    private resizeThrottle$: Subject<Event> = new Subject<Event>();
+
 
     // Element Refs
     @ViewChild('imageMergeFrontendFiller')
@@ -45,7 +47,7 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
 
     @HostListener('window:resize', ['$event'])
     public onResize(event: Event): void {
-        this.resizeThrottle$.next(event);
+        this.resizeThrottled$.next();
     }
 
     constructor(public config: ConfigService, private wrapperElement: ElementRef) {
@@ -53,32 +55,30 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
 
     public ngOnInit(): void {
         this.subscriptions.push(
-            this.resizeThrottle$
+            this.resizeThrottled$
                 .pipe(
                     throttleTime(80),
                     distinctUntilChanged()
                 )
-                .subscribe(() => {
-                    this.wrapperHeight = this.wrapperElement.nativeElement.offsetHeight;
-                    this.wrapperWidth = this.wrapperElement.nativeElement.offsetWidth;
-                    this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y;
-                })
+                .subscribe(this.calcSize)
         );
     }
 
     public ngAfterViewInit(): void {
-        setTimeout(() => {
-            this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y;
-            this.wrapperHeight = this.wrapperElement.nativeElement.offsetHeight;
-            this.wrapperWidth = this.wrapperElement.nativeElement.offsetWidth;
-        });
+        setTimeout(this.calcSize);
         this.activeLayer = this.layerImage;
         this.changeActiveLayer.emit(this.layerImage);
     }
 
     public ngOnDestroy(): void {
         this.subscriptions.forEach((subscription: Subscription) => { subscription.unsubscribe(); });
-        this.resizeThrottle$.complete();
+        this.resizeThrottled$.complete();
+    }
+
+    public calcSize(): void {
+        this.ratio = this.wrapperElement?.nativeElement.offsetHeight / (this.config?.getPlainSize().y || 1);
+        this.wrapperHeight = this.wrapperElement?.nativeElement.offsetHeight;
+        this.wrapperWidth = this.wrapperElement?.nativeElement.offsetWidth;
     }
 
     public onIconClick(layerImage: LayerImage): void {
