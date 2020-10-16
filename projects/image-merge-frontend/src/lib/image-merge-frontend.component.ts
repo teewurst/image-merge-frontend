@@ -60,12 +60,12 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
                     throttleTime(80),
                     distinctUntilChanged()
                 )
-                .subscribe(this.calcSize)
+                .subscribe(this.calcSize.bind(this))
         );
     }
 
     public ngAfterViewInit(): void {
-        setTimeout(this.calcSize);
+        setTimeout(this.calcSize.bind(this));
         this.activeLayer = this.layerImage;
         this.changeActiveLayer.emit(this.layerImage);
     }
@@ -76,9 +76,9 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     }
 
     public calcSize(): void {
-        this.ratio = this.wrapperElement?.nativeElement.offsetHeight / (this.config?.getPlainSize().y || 1);
-        this.wrapperHeight = this.wrapperElement?.nativeElement.offsetHeight;
-        this.wrapperWidth = this.wrapperElement?.nativeElement.offsetWidth;
+        this.ratio = this.wrapperElement.nativeElement.offsetHeight / (this.config.getPlainSize().y || 1);
+        this.wrapperHeight = this.wrapperElement.nativeElement.offsetHeight;
+        this.wrapperWidth = this.wrapperElement.nativeElement.offsetWidth;
     }
 
     public onIconClick(layerImage: LayerImage): void {
