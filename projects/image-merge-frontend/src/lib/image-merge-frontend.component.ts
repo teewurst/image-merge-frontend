@@ -84,7 +84,7 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
             if (plainRatio <= wrapperRatio) {
                 // select height as base for ratio
                 this.fillerWidth = this.wrapperElement.nativeElement.offsetWidth;
-                this.ratio = this.config.getPlainSize().x / this.wrapperElement.nativeElement.offsetWidth;
+                this.ratio = this.wrapperElement.nativeElement.offsetWidth / this.config.getPlainSize().x;
                 this.fillerHeight = this.wrapperElement.nativeElement.offsetWidth * plainRatio;
 
 
