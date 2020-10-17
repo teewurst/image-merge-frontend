@@ -29,14 +29,9 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     private resizeThrottled$: Subject<any> = new Subject<any>();
     @Input()
     public layerImage: LayerImage;
-    @Input()
-    public activeLayer: LayerImage;
-    @Output()
-    public changeActiveLayer: EventEmitter<LayerImage> = new EventEmitter<LayerImage>();
 
     // Subscriptions
     private subscriptions: Subscription[] = [];
-
 
     // Element Refs
     @ViewChild('imageMergeFrontendFiller')
@@ -61,8 +56,6 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
 
     public ngAfterViewInit(): void {
         setTimeout(this.calcSize.bind(this));
-        this.activeLayer = this.layerImage;
-        this.changeActiveLayer.emit(this.layerImage);
     }
 
     public ngOnDestroy(): void {
@@ -88,13 +81,6 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
                 this.fillerWidth = this.wrapperElement.nativeElement.offsetHeight * (1 / plainRatio);
             }
         });
-    }
-
-    public onIconClick(layerImage: LayerImage): void {
-        this.activeLayer.active = false;
-        this.activeLayer = layerImage;
-        this.activeLayer.active = true;
-        this.changeActiveLayer.emit(this.activeLayer);
     }
 
     public getMergeStyle(): object {
