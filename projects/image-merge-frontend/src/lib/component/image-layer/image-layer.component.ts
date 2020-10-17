@@ -15,11 +15,7 @@ export class ImageLayerComponent implements OnInit {
     public parentLayerOffset: LayerCoordinates = {x: 0, y: 0};
     @Input()
     public ratio: number;
-    @Input()
-    public activeHoverIcon: LayerImage | null;
 
-    @Output()
-    public activeHoverIconChange: EventEmitter<LayerImage | null> = new EventEmitter<LayerImage | null>();
     @Output()
     public iconClick: EventEmitter<LayerImage> = new EventEmitter<LayerImage>();
 
@@ -29,28 +25,7 @@ export class ImageLayerComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    public getAnimatedClass(subLayerImage): object {
-
-        const classMap = {
-            animate__animated: true,
-            animate__fadeIn: false,
-            animate__fadeOut: false
-        };
-
-        if (this.config.getShowIcons() && this.layerImage.active && subLayerImage.icon) {
-            classMap.animate__fadeIn = true;
-        } else {
-            classMap.animate__fadeOut = true;
-        }
-
-        return classMap;
-    }
-
     public doNotSort(): number {
         return 0;
-    }
-
-    public emitIconClick($event: LayerImage): void {
-        this.iconClick.emit($event);
     }
 }

@@ -27,10 +27,6 @@ export class ConfigService {
         return this.config.plainSize || {x: 600, y: 800};
     }
 
-    public getShowIcons(): boolean {
-        return this.config.showIcons || true;
-    }
-
     public getHeightWidthRatio(): number {
         return this.heightWidthRatio || this.getPlainSize().y / this.getPlainSize().x;
     }

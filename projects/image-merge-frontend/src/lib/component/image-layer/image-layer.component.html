@@ -1,28 +1,11 @@
 <div class="layer-image" *ngIf="layerImage">
-    <ng-container *ngFor="let subLayerImage of (layerImage.images | keyvalue : doNotSort)">
-        <lib-image-layer
-                [layerImage]="subLayerImage.value"
-                [ratio]="ratio"
-                (activeHoverIconChange)="activeHoverIcon = $event"
-                [activeHoverIcon]="(activeHoverIcon && subLayerImage.value.id !== activeHoverIcon.id) ? subLayerImage.value : null"
-                (iconClick)="activeHoverIcon = null; emitIconClick($event)"
-                [parentLayerOffset]="layerImage.subLayerOffset || {x: 0, y: 0}"
-        ></lib-image-layer>
-        <lib-image-icon
-                class="layer-image__icon"
-                *ngIf="config.getShowIcons() && subLayerImage.value.icon && layerImage.active"
-                [ngStyle]="{
-                    display: (config.getShowIcons() && layerImage.active && subLayerImage.value.icon) ? 'block' : 'none',
-                    opacity: (activeHoverIcon === null) ? 1 : 0.7
-                }"
-                [ngClass]="getAnimatedClass(subLayerImage.value)"
-                [icon]="subLayerImage.value.icon"
-                [ratio]="ratio"
-                (click)="activeHoverIcon = null; emitIconClick(subLayerImage.value)"
-                (mouseenter)="activeHoverIcon = subLayerImage.value"
-                (mouseleave)="activeHoverIcon = null"
-        ></lib-image-icon>
-    </ng-container>
+    <lib-image-layer
+            *ngFor="let subLayerImage of (layerImage.images | keyvalue : doNotSort)"
+            [layerImage]="subLayerImage.value"
+            [ratio]="ratio"
+            [parentLayerOffset]="layerImage.subLayerOffset || {x: 0, y: 0}"
+    ></lib-image-layer>
+
 
     <img class="layer-image__image"
          *ngIf="layerImage.url"
@@ -33,8 +16,7 @@
                 top: (layerImage.offset.y * ratio + parentLayerOffset.y * ratio) + 'px',
                 left: (layerImage.offset.x * ratio + parentLayerOffset.x * ratio) + 'px',
                 height: layerImage.size.y * ratio + 'px',
-                width: layerImage.size.x * ratio + 'px',
-                opacity: (activeHoverIcon === null) ? 1 : 0.7
+                width: layerImage.size.x * ratio + 'px'
               }"
     />
 </div>

@@ -1,8 +1,6 @@
-import {async, ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {ImageMergeFrontendComponent} from './image-merge-frontend.component';
 import {ImageLayerComponent} from './component/image-layer/image-layer.component';
-import {ImageIconComponent} from './component/image-icon/image-icon.component';
 import {CommonModule} from '@angular/common';
 import {ConfigService, IMAGE_MERGE_FRONTEND_CONFIG_TOKEN} from './services/config.service';
 import {IconsModule} from './icons/icons.module';
@@ -14,7 +12,7 @@ describe('ImageMergeFrontendComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ImageMergeFrontendComponent, ImageLayerComponent, ImageIconComponent],
+      declarations: [ImageMergeFrontendComponent, ImageLayerComponent],
       imports: [
         CommonModule,
         IconsModule
