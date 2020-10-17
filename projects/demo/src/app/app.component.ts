@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {LayerImage} from '../../../image-merge-frontend/src/lib/models/layer-object.interface';
 import {layerImageMock} from './app.mock';
 import {Subject} from 'rxjs';
@@ -13,11 +13,16 @@ export class AppComponent implements OnInit {
 
     fullWidth = false;
     public layerImage: LayerImage;
-    public activeLayerImage: LayerImage;
+
     public resetLayerImage: string;
     public height: number = 800;
     private toggleHeights: number[] = [900, 700];
     public resize$: Subject<any> = new Subject<any>();
+
+    @HostListener('window:resize', ['$event'])
+    public onResize(event: Event): void {
+        this.resize$.next(event);
+    }
 
     public ngOnInit(): void {
         this.layerImage = layerImageMock;
@@ -49,19 +54,6 @@ export class AppComponent implements OnInit {
     public triggerResize(): void {
         this.fullWidth = !this.fullWidth;
         this.resize$.next(this.height * Math.random());
-    }
-
-    public resetActive(): void {
-        this.layerImage = JSON.parse(this.resetLayerImage);
-        this.activeLayerImage = this.layerImage;
-    }
-
-    public isObject(item): boolean {
-        return (item && typeof item === 'object' && !Array.isArray(item));
-    }
-
-    public setActiveLayerImage($event: LayerImage): void {
-        this.activeLayerImage = $event;
     }
 
     public toggleHeight(height): void {

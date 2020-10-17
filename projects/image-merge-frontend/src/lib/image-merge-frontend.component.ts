@@ -45,11 +45,6 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     public fillerHeight: number;
     public fillerWidth: number;
 
-    @HostListener('window:resize', ['$event'])
-    public onResize(event: Event): void {
-        this.resizeThrottled$.next(event);
-    }
-
     constructor(public config: ConfigService, private wrapperElement: ElementRef) {
     }
 
