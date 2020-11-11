@@ -8,9 +8,9 @@
 
 
     <img class="layer-image__image"
-         *ngIf="layerImage.url"
-         [src]="layerImage.url"
-         [alt]="layerImage.name"
+         *ngIf="isNumeric(layerImage.currentVariant) && layerImage.variants && layerImage.variants[layerImage.currentVariant]"
+         [src]="layerImage.variants[layerImage.currentVariant].url"
+         [alt]="layerImage.variants[layerImage.currentVariant].name"
          [ngStyle]="{
                 position: 'absolute',
                 top: (layerImage.offset.y * ratio + parentLayerOffset.y * ratio) + 'px',

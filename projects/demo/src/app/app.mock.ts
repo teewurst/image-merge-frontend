@@ -14,7 +14,14 @@ export const layerImageMock: LayerImage = {
             consistsOf: [],
             id: 2,
             name: 'Body Background',
-            url: '/assets/body.png',
+            variants: [
+                {
+                    name: 'Yellow Body',
+                    url: '/assets/body.png',
+                    key: 'color',
+                    preview: '/assets/body.png'
+                }
+            ],
             size: {
                 x: 500,
                 y: 500
@@ -55,7 +62,14 @@ export const layerImageMock: LayerImage = {
                     volatileUuid: '',
                     typeId: 2,
                     consistsOf: [],
-                    url: '/assets/mouth.png',
+                    variants: [
+                        {
+                            url: '/assets/mouth.png',
+                            name: 'Mouth',
+                            key: 'Mouth',
+                            preview: ''
+                        }
+                    ],
                     id: 4,
                     name: 'Mouth',
                     size: {
@@ -83,7 +97,14 @@ export const layerImageMock: LayerImage = {
                     volatileUuid: '',
                     typeId: 2,
                     consistsOf: [],
-                    url: '/assets/eyes.png',
+                    variants: [
+                        {
+                            url: '/assets/eyes.png',
+                            name: 'Mouth',
+                            key: 'Mouth',
+                            preview: ''
+                        }
+                    ],
                     id: 5,
                     name: 'eyes',
                     size: {

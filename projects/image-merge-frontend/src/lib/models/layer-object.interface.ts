@@ -5,13 +5,22 @@ export interface LayerImage {
   typeId: number;
   consistsOf: number[];
   volatileUuid?: string;
-  url?: string;
+  currentVariant?: number;
+  variants?: Variant[];
+  preview?: string;
   size?: LayerCoordinates;
   offset?: LayerCoordinates;
   subLayerOffset?: LayerCoordinates;
   actualSize?: LayerCoordinates;
   images?: {[key: number]: LayerImage };
   icon?: Icon;
+}
+
+export interface Variant {
+  name: string;
+  key: string;
+  url: string;
+  preview: string;
 }
 
 export interface LayerCoordinates {
