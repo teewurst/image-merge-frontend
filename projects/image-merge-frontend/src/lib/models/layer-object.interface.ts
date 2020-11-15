@@ -11,8 +11,6 @@ export interface LayerImage {
 }
 
 export interface Variant {
-  name: string;
-  colorCode: string;
   url: string;
 }
 

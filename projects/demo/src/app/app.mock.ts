@@ -8,9 +8,7 @@ export const layerImageMock: LayerImage = {
             consistsOf: [],
             variants: [
                 {
-                    name: 'Yellow Body',
-                    url: '/assets/body.png',
-                    colorCode: '',
+                    url: '/assets/body.png'
                 }
             ],
             size: {
@@ -35,9 +33,7 @@ export const layerImageMock: LayerImage = {
                     consistsOf: [],
                     variants: [
                         {
-                            url: '/assets/mouth.png',
-                            name: 'Mouth',
-                            colorCode: ''
+                            url: '/assets/mouth.png'
                         }
                     ],
                     size: {
@@ -59,8 +55,6 @@ export const layerImageMock: LayerImage = {
                     variants: [
                         {
                             url: '/assets/eyes.png',
-                            name: 'Mouth',
-                            colorCode: ''
                         }
                     ],
                     size: {
