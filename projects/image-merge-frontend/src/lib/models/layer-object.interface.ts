@@ -12,9 +12,8 @@ export interface LayerImage {
 
 export interface Variant {
   name: string;
-  key: string;
+  colorCode: string;
   url: string;
-  preview: string;
 }
 
 export interface LayerCoordinates {

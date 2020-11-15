@@ -10,8 +10,7 @@ export const layerImageMock: LayerImage = {
                 {
                     name: 'Yellow Body',
                     url: '/assets/body.png',
-                    key: 'color',
-                    preview: '/assets/body.png'
+                    colorCode: '',
                 }
             ],
             size: {
@@ -38,8 +37,7 @@ export const layerImageMock: LayerImage = {
                         {
                             url: '/assets/mouth.png',
                             name: 'Mouth',
-                            key: 'Mouth',
-                            preview: ''
+                            colorCode: ''
                         }
                     ],
                     size: {
@@ -62,8 +60,7 @@ export const layerImageMock: LayerImage = {
                         {
                             url: '/assets/eyes.png',
                             name: 'Mouth',
-                            key: 'Mouth',
-                            preview: ''
+                            colorCode: ''
                         }
                     ],
                     size: {
