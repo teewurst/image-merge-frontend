@@ -3,7 +3,6 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    HostListener,
     Input,
     OnDestroy,
     OnInit,
@@ -29,6 +28,8 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     private resizeThrottled$: Subject<any> = new Subject<any>();
     @Input()
     public layerImage: LayerImage;
+    @Output()
+    public ratioChange: EventEmitter<number> = new EventEmitter<number>();
 
     // Subscriptions
     private subscriptions: Subscription[] = [];
@@ -80,6 +81,7 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
                 this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y;
                 this.fillerWidth = this.wrapperElement.nativeElement.offsetHeight * (1 / plainRatio);
             }
+            this.ratioChange.emit(this.ratio);
         });
     }
 
