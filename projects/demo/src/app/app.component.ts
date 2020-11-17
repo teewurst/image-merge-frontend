@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
     public height: number = 800;
     private toggleHeights: number[] = [900, 700];
     public resize$: Subject<any> = new Subject<any>();
+    public maxHeight: number;
 
     @HostListener('window:resize', ['$event'])
     public onResize(event: Event): void {

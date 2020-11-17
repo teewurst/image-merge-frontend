@@ -1,8 +1,13 @@
 <div>
     <!-- does not work currently <button (click)="randomizeSize()">Randomize Size</button> -->
     <button (click)="triggerResize()">Trigger Resize</button>
-    <button (click)="toggleHeight(height)">Toggle Height (is: {{height}})</button>
+    <button (click)="toggleHeight(height)">Toggle Height (is: {{height}}; Max Height: {{maxHeight | number:'1.0-0'}})</button>
 </div>
-<div [style]="{width: (!fullWidth) ? '100%' : '600px', 'height': height + 'px', border: '1px solid black', position: 'relative'}">
-    <lib-image-merge-frontend [layerImage]="layerImage" [resizeThrottled$]="resize$"></lib-image-merge-frontend>
+<div [style]="{width: (!fullWidth) ? '100%' : '600px', 'height': ((maxHeight < height) ? maxHeight : height) + 'px', border: '1px solid black', position: 'relative'}">
+    <lib-image-merge-frontend
+            [layerImage]="layerImage"
+            [resizeThrottled$]="resize$"
+            [maxHeight]="height"
+            (currentMaxHeightChange)="maxHeight = $event"
+    ></lib-image-merge-frontend>
 </div>

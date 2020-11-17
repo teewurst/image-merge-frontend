@@ -28,8 +28,12 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     private resizeThrottled$: Subject<any> = new Subject<any>();
     @Input()
     public layerImage: LayerImage;
+    @Input()
+    public maxHeight: number;
     @Output()
     public ratioChange: EventEmitter<number> = new EventEmitter<number>();
+    @Output()
+    public currentMaxHeightChange: EventEmitter<number> = new EventEmitter<number>();
 
     // Subscriptions
     private subscriptions: Subscription[] = [];
@@ -66,22 +70,23 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
 
     public calcSize(): void {
         setTimeout(() => {
-            const wrapperRatio = this.wrapperElement.nativeElement.offsetHeight / this.wrapperElement.nativeElement.offsetWidth;
             const plainRatio = this.config.getHeightWidthRatio();
+            const maxHeight = this.maxHeight || this.config.getPlainSize().y;
 
-            // if the ratio of the wrapper element sides
-            if (plainRatio <= wrapperRatio) {
-                // select height as base for ratio
-                this.fillerWidth = this.wrapperElement.nativeElement.offsetWidth;
-                this.ratio = this.wrapperElement.nativeElement.offsetWidth / this.config.getPlainSize().x;
-                this.fillerHeight = this.wrapperElement.nativeElement.offsetWidth * plainRatio;
-            } else {
-                // select width as base for ratio
-                this.fillerHeight = this.wrapperElement.nativeElement.offsetHeight;
-                this.ratio = this.wrapperElement.nativeElement.offsetHeight / this.config.getPlainSize().y;
-                this.fillerWidth = this.wrapperElement.nativeElement.offsetHeight * (1 / plainRatio);
+            let width = this.wrapperElement.nativeElement.offsetWidth;
+            let height = width * plainRatio;
+
+            if (height > maxHeight) {
+                height = maxHeight;
+                width = height * (1 / plainRatio);
             }
+
+            this.fillerHeight = height;
+            this.fillerWidth = width;
+            this.ratio = width / this.config.getPlainSize().x;
+
             this.ratioChange.emit(this.ratio);
+            this.currentMaxHeightChange.emit(this.fillerHeight);
         });
     }
 
