@@ -3,10 +3,10 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    Input,
+    Input, OnChanges,
     OnDestroy,
     OnInit,
-    Output,
+    Output, SimpleChanges,
     ViewChild
 } from '@angular/core';
 import {LayerImage} from './models/layer-object.interface';
@@ -19,7 +19,7 @@ import {ConfigService} from './services/config.service';
     templateUrl: './image-merge-frontend.component.html',
     styleUrls: ['./image-merge-frontend.component.less']
 })
-export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ImageMergeFrontendComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
     public ratio: number;
 
@@ -36,7 +36,7 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     public currentMaxHeightChange: EventEmitter<number> = new EventEmitter<number>();
 
     // Subscriptions
-    private subscriptions: Subscription[] = [];
+    private resizeThrottleSubscription: Subscription;
 
     // Element Refs
     @ViewChild('imageMergeFrontendFiller')
@@ -49,22 +49,22 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     }
 
     public ngOnInit(): void {
-        this.subscriptions.push(
-            this.resizeThrottled$
-                .pipe(
-                    throttleTime(80),
-                    distinctUntilChanged()
-                )
-                .subscribe(this.calcSize.bind(this))
-        );
+        this.subscribeToResizeSubject(this.resizeThrottled$);
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes.resizeThrottled$ && changes.resizeThrottled$.previousValue !== changes.resizeThrottled$.currentValue) {
+            this.resizeThrottleSubscription.unsubscribe();
+            this.subscribeToResizeSubject(changes.resizeThrottled$.currentValue);
+        }
     }
 
     public ngAfterViewInit(): void {
-        setTimeout(this.calcSize.bind(this));
+        this.calcSize.bind(this);
     }
 
     public ngOnDestroy(): void {
-        this.subscriptions.forEach((subscription: Subscription) => { subscription.unsubscribe(); });
+        this.resizeThrottleSubscription.unsubscribe();
         this.resizeThrottled$.complete();
     }
 
@@ -95,5 +95,15 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
             height: this.fillerHeight + 'px',
             width: this.fillerWidth  + 'px'
         };
+    }
+
+    private subscribeToResizeSubject(currentValue: Subject<any>): void {
+        this.resizeThrottleSubscription =
+            currentValue
+                .pipe(
+                    throttleTime(80),
+                    distinctUntilChanged()
+                )
+                .subscribe(this.calcSize.bind(this));
     }
 }
