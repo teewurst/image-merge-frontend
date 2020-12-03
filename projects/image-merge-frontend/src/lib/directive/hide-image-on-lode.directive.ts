@@ -5,21 +5,21 @@ import {Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChange
 })
 export class HideImageOnLodeDirective implements OnInit, OnDestroy, OnChanges{
 
-  @Input('src')
-  public source: string;
+  @Input()
+  public src: string;
 
   constructor(private elRef: ElementRef) {}
 
   public ngOnInit(): void {
-    this.elRef.nativeElement.addEventListener('mouseenter', this.showElement);
+    this.elRef.nativeElement.addEventListener('load', this.showElement);
   }
 
   public ngOnDestroy(): void {
-    this.elRef.nativeElement.removeEventListener('mouseenter', this.showElement);
+    this.elRef.nativeElement.removeEventListener('load', this.showElement);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.src && changes.src.currentValue !== changes.src.previousValue) {
+    if (changes.imageSource && changes.imageSource.currentValue !== changes.imageSource.previousValue) {
       this.elRef.nativeElement.style.display = 'none';
     }
   }
