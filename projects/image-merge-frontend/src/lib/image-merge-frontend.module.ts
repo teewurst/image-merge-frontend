@@ -8,10 +8,11 @@ import {
     ImageMergeFrontendConfigInterface
 } from './services/config.service';
 import {IconsModule} from './icons/icons.module';
+import { HideImageOnLodeDirective } from './directive/hide-image-on-lode.directive';
 
 
 @NgModule({
-    declarations: [ImageMergeFrontendComponent, ImageLayerComponent],
+    declarations: [ImageMergeFrontendComponent, ImageLayerComponent, HideImageOnLodeDirective],
     imports: [
         CommonModule,
         IconsModule
