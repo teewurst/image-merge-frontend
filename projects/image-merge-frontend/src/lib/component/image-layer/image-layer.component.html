@@ -9,8 +9,8 @@
 
     <img class="layer-image__image"
          libHideImageOnLode
-         *ngIf="isNumeric(layerImage.currentVariant) && layerImage.variants && layerImage.variants[layerImage.currentVariant]"
-         [src]="layerImage.variants[layerImage.currentVariant].url"
+         *ngIf="layerImage.url || (isNumeric(layerImage.currentVariant) && layerImage.variants && layerImage.variants[layerImage.currentVariant])"
+         [src]="layerImage.url || layerImage.variants[layerImage.currentVariant].url"
          alt="image"
          [ngStyle]="{
                 position: 'absolute',

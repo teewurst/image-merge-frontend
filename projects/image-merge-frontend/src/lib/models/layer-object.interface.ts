@@ -1,6 +1,7 @@
 export interface LayerImage {
   active: boolean;
   consistsOf: number[];
+  url?: string;
   currentVariant?: number;
   variants?: Variant[];
   size?: LayerCoordinates;

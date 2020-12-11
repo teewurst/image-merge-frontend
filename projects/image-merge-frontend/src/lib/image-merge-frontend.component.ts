@@ -60,7 +60,7 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     }
 
     public ngAfterViewInit(): void {
-        setTimeout(this.calcSize.bind(this));
+        this.calcSize.bind(this);
     }
 
     public ngOnDestroy(): void {
