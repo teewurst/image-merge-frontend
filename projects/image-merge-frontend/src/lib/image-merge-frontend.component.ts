@@ -2,7 +2,7 @@ import {
     AfterViewInit,
     Component,
     ElementRef,
-    EventEmitter,
+    EventEmitter, HostBinding,
     Input,
     OnDestroy,
     OnInit,
@@ -30,6 +30,9 @@ export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDes
     public layerImage: LayerImage;
     @Input()
     public maxHeight: number;
+    @Input()
+    @HostBinding('style.justify-content')
+    public moveTo: 'flex-start' | 'flex-end' | 'center' = 'center';
     @Output()
     public ratioChange: EventEmitter<number> = new EventEmitter<number>();
     @Output()
