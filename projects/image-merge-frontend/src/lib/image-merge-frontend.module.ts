@@ -9,11 +9,10 @@ import {
 } from './services/config.service';
 import {IconsModule} from './icons/icons.module';
 import { HideImageOnLodeDirective } from './directive/hide-image-on-lode.directive';
-import { TestDirective } from './test.directive';
 
 
 @NgModule({
-    declarations: [ImageMergeFrontendComponent, ImageLayerComponent, HideImageOnLodeDirective, TestDirective],
+    declarations: [ImageMergeFrontendComponent, ImageLayerComponent, HideImageOnLodeDirective],
     imports: [
         CommonModule,
         IconsModule

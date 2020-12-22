@@ -11,7 +11,7 @@
     "test:headless": "ng test --project=image-merge-frontend --watch=false --browsers=ChromeHeadlessCustom",
     "lint": "ng lint --project=image-merge-frontend",
     "e2e": "ng e2e",
-    "build:ci": "npm run clean && ng run lint && npm run test:headless && npm run build:prod"
+    "build:ci": "npm run lint && npm run clean && npm run test:headless && npm run build:prod"
   },
   "private": false,
   "dependencies": {
