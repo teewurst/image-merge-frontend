@@ -8,7 +8,7 @@
 
 
     <img class="layer-image__image"
-         libHideImageOnLode
+         libHideImageOnLoad
          *ngIf="layerImage.url || (isNumeric(layerImage.currentVariant) && layerImage.variants && layerImage.variants[layerImage.currentVariant])"
          [src]="layerImage.url || layerImage.variants[layerImage.currentVariant].url"
          alt="image"

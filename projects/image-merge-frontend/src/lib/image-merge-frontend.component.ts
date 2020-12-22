@@ -21,76 +21,105 @@ import {ConfigService} from './services/config.service';
 })
 export class ImageMergeFrontendComponent implements OnInit, AfterViewInit, OnDestroy {
 
+    /** Ratio to multiply image axis with */
     public ratio: number;
 
     // Inputs Outputs
+    /** Input resize event from parent */
     @Input()
     private resizeThrottled$: Subject<any> = new Subject<any>();
+
+    /** Root Layer image to be randered */
     @Input()
     public layerImage: LayerImage;
+
+    /** Maximum height the plain takes */
     @Input()
     public maxHeight: number;
+
+    /** Moves images to left/center/right with flex properties */
     @Input()
     @HostBinding('style.justify-content')
-    public moveTo: 'flex-start' | 'flex-end' | 'center' = 'center';
+    private moveTo: 'flex-start' | 'flex-end' | 'center' = 'center';
+
+    /** Emits a change event if this.ratio changes */
     @Output()
-    public ratioChange: EventEmitter<number> = new EventEmitter<number>();
+    private ratioChange: EventEmitter<number> = new EventEmitter<number>();
+
+    /** Emits height the current image takes at max */
     @Output()
-    public currentMaxHeightChange: EventEmitter<number> = new EventEmitter<number>();
+    private currentMaxHeightChange: EventEmitter<number> = new EventEmitter<number>();
 
     // Subscriptions
+    /** Local subscripts to be canceled of destroy */
     private subscriptions: Subscription[] = [];
 
     // Element Refs
+    /** Filler element */
     @ViewChild('imageMergeFrontendFiller')
     public fillerElement: ElementRef;
 
+    /** Height of filler element */
     public fillerHeight: number;
+    /** Width of filler element */
     public fillerWidth: number;
 
-    constructor(public config: ConfigService, private wrapperElement: ElementRef) {
+    constructor(private config: ConfigService, private wrapperElement: ElementRef) {
     }
 
     public ngOnInit(): void {
+        // On Resize trigger this.calcSize
         this.subscriptions.push(
             this.resizeThrottled$
                 .pipe(
                     throttleTime(80),
                     distinctUntilChanged()
                 )
-                .subscribe(this.calcSize.bind(this))
+                .subscribe(this.getCalSizeCallback().bind(this))
         );
     }
 
     public ngAfterViewInit(): void {
-        this.calcSize.bind(this);
+        this.getCalSizeCallback()();
+    }
+
+    private getCalSizeCallback(): () => void {
+        return () => setTimeout(this.calcSize.bind(this));
+    }
+
+    /** Calculates  */
+    public calcSize(width: number = 0): void {
+        // get ration if images (height / width)
+        const plainRatio = this.config.getHeightWidthRatio();
+        // define max height of images
+        const maxHeight = this.maxHeight || this.config.getPlainSize().y;
+
+        // get with of wrapper
+        width = width || this.wrapperElement.nativeElement.offsetWidth;
+        // calculate height by plain size
+        let height = width * plainRatio;
+
+        // if height exceeds max height shrink width if filler element
+        if (height > maxHeight) {
+            height = maxHeight;
+            width = height * (1 / plainRatio);
+        }
+
+        // set filler element size
+        this.fillerHeight = height;
+        this.fillerWidth = width;
+        // calculate new ratio for resizing images, so the fit plain
+        this.ratio = width / this.config.getPlainSize().x;
+
+        // emit change of ration
+        this.ratioChange.emit(this.ratio);
+        // emit change of filler height (so parent my adapt)
+        this.currentMaxHeightChange.emit(this.fillerHeight);
     }
 
     public ngOnDestroy(): void {
+        // unsubscribe all subscriptions
         this.subscriptions.forEach((subscription: Subscription) => { subscription.unsubscribe(); });
-        this.resizeThrottled$.complete();
-    }
-
-    public calcSize(): void {
-        setTimeout(() => {
-            const plainRatio = this.config.getHeightWidthRatio();
-            const maxHeight = this.maxHeight || this.config.getPlainSize().y;
-
-            let width = this.wrapperElement.nativeElement.offsetWidth;
-            let height = width * plainRatio;
-
-            if (height > maxHeight) {
-                height = maxHeight;
-                width = height * (1 / plainRatio);
-            }
-
-            this.fillerHeight = height;
-            this.fillerWidth = width;
-            this.ratio = width / this.config.getPlainSize().x;
-
-            this.ratioChange.emit(this.ratio);
-            this.currentMaxHeightChange.emit(this.fillerHeight);
-        });
     }
 
     public getMergeStyle(): object {

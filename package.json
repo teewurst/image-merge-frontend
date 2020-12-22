@@ -11,9 +11,9 @@
     "test:headless": "ng test --project=image-merge-frontend --watch=false --browsers=ChromeHeadlessCustom",
     "lint": "ng lint --project=image-merge-frontend",
     "e2e": "ng e2e",
-    "build:ci": "npm run clean && npm run test:headless && npm run build:prod"
+    "build:ci": "npm run clean && ng run lint && npm run test:headless && npm run build:prod"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~10.1.2",
     "@angular/common": "~10.1.2",
@@ -49,6 +49,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~3.3.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "ng-mocks": "^11.2.6",
     "ng-packagr": "^10.1.2",
     "protractor": "~7.0.0",
     "puppeteer": "^5.3.1",
