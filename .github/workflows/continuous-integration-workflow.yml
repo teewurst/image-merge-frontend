@@ -45,9 +45,9 @@ jobs:
           git init
           git remote add origin https://${{ secrets.IMAGE_MERGE_FRONTEND_BUILD_SECRET }}@github.com/teewurst/image-merge-frontend.git
           git checkout -B "dist/${GITHUB_REF#refs/heads/}"
-          git merge -s ours origin "dist/${GITHUB_REF#refs/heads/}"
           git config user.name deploygithub-actions
           git config user.email deploy@rerp.de
           git add .
           git commit -m "[BUILD] Automatically generated"
+          git pull -s recursive -X ours
           git push -fu origin "dist/${GITHUB_REF#refs/heads/}"
