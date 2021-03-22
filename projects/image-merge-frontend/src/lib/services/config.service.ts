@@ -24,7 +24,7 @@ export class ConfigService {
     }
 
     public getPlainSize(): LayerCoordinates {
-        return this.config.plainSize || {x: 500, y: 500};
+        return this.config.plainSize || {x: 600, y: 800};
     }
 
     public getHeightWidthRatio(): number {
