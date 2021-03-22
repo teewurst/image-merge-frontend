@@ -1,0 +1,25 @@
+{
+  "name": "image-merge-frontend",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^10.0.11",
+    "@angular/core": "^10.0.11",
+    "@fortawesome/angular-fontawesome": "^0.7.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-brands-svg-icons": "^5.13.0",
+    "@fortawesome/free-regular-svg-icons": "^5.13.0",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "animate.css": "^4.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "bundles/image-merge-frontend.umd.js",
+  "module": "fesm2015/image-merge-frontend.js",
+  "es2015": "fesm2015/image-merge-frontend.js",
+  "esm2015": "esm2015/image-merge-frontend.js",
+  "fesm2015": "fesm2015/image-merge-frontend.js",
+  "typings": "image-merge-frontend.d.ts",
+  "metadata": "image-merge-frontend.metadata.json",
+  "sideEffects": false
+}
